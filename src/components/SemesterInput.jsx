@@ -1,0 +1,70 @@
+import React, { useState, useRef, useEffect } from 'react';
+
+const SemesterInput = ({ value, onChange }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedSemester, setSelectedSemester] = useState(value || '');
+    const dropdownRef = useRef(null);
+    const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleSemesterSelect = (semester) => {
+        setSelectedSemester(semester);
+        setIsOpen(false);
+        onChange(semester);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    return (
+        <div className="relative max-w-[50vw]">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="semester">
+                Semester
+            </label>
+            <input
+                type="text"
+                value={selectedSemester}
+                onClick={toggleDropdown}
+                readOnly
+                placeholder="Select semester."
+                className="border rounded px-4 py-2 w-full focus:outline-none focus:border-blue-500"
+            />
+            {/* <span
+                className="absolute right-3 top-2 pointer-events-none"
+            >
+                ▼
+            </span> */}
+
+            {isOpen && (
+                <div
+                    ref={dropdownRef}
+                    className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg mt-1 max-h-32 overflow-y-auto w-full"
+                >
+                    {romanNumerals.slice(0, 7).map((numeral, index) => (
+                        <div
+                            key={index}
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleSemesterSelect(`Sem ${numeral}`)}
+                        >
+                            Sem {numeral}
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default SemesterInput;
