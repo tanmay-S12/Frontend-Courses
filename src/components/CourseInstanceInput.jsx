@@ -6,7 +6,7 @@ const CourseInstanceInput = () => {
     return (
         <div>
             {/* <div className="flex justify-center items-center min-h-screen"> */}
-            <form className="w-full max-w-sm p-4 bg-white rounded-lg shadow-md border-2" style={{ width: '40%' }}>
+            <form className="w-full p-4 bg-white rounded-lg shadow-md border-2">
 
                 <div className="text-center">
                     <h2 className="text-xl font-bold mb-4">Course Instance</h2>

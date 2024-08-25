@@ -8,12 +8,14 @@ import CourseInput from './components/CourseInput.jsx'
 import CourseInstanceInput from './components/CourseInstanceInput.jsx'
 
 import SemesterInput from './components/SemesterInput.jsx'
+import Header from './components/Header.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
-    <CourseInput />
-    <CourseInstanceInput />
+    {/* <CourseInput /> */}
+    {/* <CourseInstanceInput /> */}
     {/* <SemesterInput/> */}
+    <Header />
   </StrictMode>,
 )

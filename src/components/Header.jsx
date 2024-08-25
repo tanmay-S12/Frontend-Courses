@@ -1,47 +1,30 @@
 import React from 'react'
+import CourseInstanceInput from './CourseInstanceInput'
+import CourseInput from './CourseInput'
 
 const Header = () => {
   return (
-    <div className='border-black border-5 w-50vw'>
-        {/* <div className="flex justify-center items-center min-h-screen m-20px border-slate-950 "> */}
-        <div>
-      <form className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">Course Details</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="input1">
-            Input 1
-          </label>
-          <input
-            className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-            id="input1"
-            type="text"
-            placeholder="Enter first input"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="input2">
-            Input 2
-          </label>
-          <input
-            className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-            id="input2"
-            type="text"
-            placeholder="Enter second input"
-          />
-        </div>
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Add Course!
-          </button>
-        </div>
-      </form>
-    </div>
-    </div>
+    <div>
 
+      <div className='w-full shadow-md py-2 flex justify-start '>
+        <img className='w-20 mx-4 my-auto' src=".\public\iitblogo.png" alt="IIT Bombay" />
+        {/* <h1 className='text-2xl font-bold my-auto '>Indian Institute of Technology Bombay</h1> */}
+        <h1 className='text-4xl font-bold my-auto '>IIT Bombay</h1>
+      </div>
+
+      <div className="container mx-auto my-5 text-center">
+        <h1 className="text-5xl font-bold">Courses and Courselist!</h1>
+        <p className="mt-2  text-2xl">
+          Explore the details of all available courses and course instances.
+        </p>
+      </div>
+      <div className="w-full flex justify-around p-4">
+        <CourseInput />
+        <CourseInstanceInput />
+      </div>
+
+
+    </div>
   )
 }
-
 export default Header
