@@ -4,16 +4,18 @@ const SemesterInput = ({ value, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedSemester, setSelectedSemester] = useState(value || '');
     const dropdownRef = useRef(null);
-    const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+    const romanNumerals = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
 
     const handleSemesterSelect = (semester) => {
-        setSelectedSemester(semester);
+        const selectedIndex = romanNumerals.indexOf(semester.split(' ')[1]);
+        const selectedSemester = selectedIndex !== -1 ? selectedIndex + 1 : null;
+        setSelectedSemester(`Sem ${romanNumerals[selectedIndex]}`);
         setIsOpen(false);
-        onChange(semester);
+        onChange(selectedSemester);
     };
 
     useEffect(() => {
@@ -41,11 +43,7 @@ const SemesterInput = ({ value, onChange }) => {
                 placeholder="Select semester."
                 className="border rounded px-4 py-2 w-full focus:outline-none focus:border-blue-500"
             />
-            {/* <span
-                className="absolute right-3 top-2 pointer-events-none"
-            >
-                ▼
-            </span> */}
+
 
             {isOpen && (
                 <div
@@ -60,6 +58,9 @@ const SemesterInput = ({ value, onChange }) => {
                         >
                             Sem {numeral}
                         </div>
+
+
+
                     ))}
                 </div>
             )}

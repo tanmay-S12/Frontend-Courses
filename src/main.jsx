@@ -9,13 +9,19 @@ import CourseInstanceInput from './components/CourseInstanceInput.jsx'
 
 import SemesterInput from './components/SemesterInput.jsx'
 import Header from './components/Header.jsx'
+import CourseInstanceTable from './components/CourseTable.jsx'
+import Topbar from './components/Topbar.jsx'
+import InstanceTable from './components/InstanceTable.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
+    <Topbar />
     {/* <CourseInput /> */}
     {/* <CourseInstanceInput /> */}
     {/* <SemesterInput/> */}
     <Header />
+    <CourseInstanceTable />
+    {/* <InstanceTable /> */}
   </StrictMode>,
 )
