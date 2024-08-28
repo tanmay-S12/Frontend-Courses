@@ -45,6 +45,9 @@ const CourseInstanceInput = () => {
     };
 
 
+
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -90,27 +93,28 @@ const CourseInstanceInput = () => {
 
 
     return (
-        <div>
+        <div className=''>
             <div className='sm:w-80 w-72'>
 
-                <form className="w-full py-4 px-6  bg-white rounded-lg shadow-md border-2"
-                    onSubmit={handleSubmit}>
+                <form className="w-full py-4 px-6 bg-white rounded-lg shadow-md border-2"
+                    onSubmit={handleSubmit}
+                >
 
                     <div className="text-center">
-                        <h2 className="text-xl font-bold mb-4">Course Instance</h2>
+                        <h2 className="text-xl font-bold mb-4 underline underline-offset-4">Course Instance</h2>
                     </div>
 
-                    <div className='flex justify-end'>
+                    {/* <div className='flex justify-end'>
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
                             type="reset"
                         >
                             Reset
                         </button>
-                    </div>
+                    </div> */}
 
                     {/* Select Course Dropdown */}
-                    <div className="mb-4">
+                    <div className="mb-5">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="selectCourse">
                             Select Course
                         </label>
@@ -132,15 +136,16 @@ const CourseInstanceInput = () => {
 
 
 
+                    <div className='mb-5'>
+                        <SemesterInput
+                            value={courseInstance.semester}
+                            onChange={handleSemesterChange}
+                        />
+                    </div>
 
-                    <SemesterInput
-                        value={courseInstance.semester}
-                        onChange={handleSemesterChange}
-                    />
 
 
-
-                    <div className="mb-4">
+                    <div className="mb-6">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="year">
                             Year
                         </label>
@@ -161,7 +166,7 @@ const CourseInstanceInput = () => {
                     </div>
 
                     {/* Submit Button */}
-                    <div className="flex justify-center mt-6">
+                    <div className="flex justify-center mt-6 mb-4">
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             type="submit"

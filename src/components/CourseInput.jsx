@@ -55,7 +55,7 @@ const CourseInput = () => {
                 <div>
                     <form className="w-full border-2 shadow-md max-w-sm py-4 px-6 bg-white rounded-lg" onSubmit={handleSubmit}>
                         <div className="text-center">
-                            <h2 className="text-xl font-bold mb-4" id='h2'>Course Details</h2>
+                            <h2 className="text-xl underline underline-offset-4 font-bold mb-4" id='h2'>Course Details</h2>
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="courseTitle">
