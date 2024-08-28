@@ -22,6 +22,6 @@ createRoot(document.getElementById('root')).render(
     {/* <SemesterInput/> */}
     <Header />
     <CourseInstanceTable />
-    {/* <InstanceTable /> */}
+    <InstanceTable />
   </StrictMode>,
 )

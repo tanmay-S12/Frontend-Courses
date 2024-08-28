@@ -9,7 +9,7 @@ const CourseInstanceInput = () => {
     const [courseInstance, setCourseInstance] = useState({
         year: '',
         semester: '',
-        courseId: ''
+        course: ''
     });
 
 
@@ -19,6 +19,8 @@ const CourseInstanceInput = () => {
             const response = await fetch('http://localhost:8080/api/courses');
             const data = await response.json();
             setCourses(data);
+            console.log("Course data from server in courseInstance Input", data)
+
         } catch (error) {
             console.error('Error fetching courses:', error);
         }
@@ -27,12 +29,11 @@ const CourseInstanceInput = () => {
         fetchCourses();
     }, []);
 
-
-
     const handleInputChange = (e) => {
+        const { name, value } = e.target;
         setCourseInstance({
             ...courseInstance,
-            [e.target.name]: e.target.value
+            [name]: name === 'year' ? Number(value) : value
         });
     };
 
@@ -45,19 +46,17 @@ const CourseInstanceInput = () => {
 
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-
         try {
-            const course = courses.find(c => c.title === e.target.selectCourse.value);
-            const courseId = course ? course.id : null;
-
-
+            const coursetemp = courses.find(c => c.title === e.target.selectCourse.value);
+            const course = coursetemp ? coursetemp.id : null;
             const instanceData = {
                 year: courseInstance.year,
                 semester: courseInstance.semester,
-                courseId
+                course
             };
+            console.log("Instance data from client to server ", instanceData);
+
 
             const response = await fetch('http://localhost:8080/api/instances', {
                 method: 'POST',
@@ -67,22 +66,26 @@ const CourseInstanceInput = () => {
                 body: JSON.stringify(instanceData)
             });
 
-            const data = await response.json();
-            console.log('Course instance created:', data);
+            if (response.ok) {
+                const data = await response.text();
+                console.log('Course instance created:', data);
+                setCourseInstance({
+                    year: '',
+                    semester: '',
+                    course: ''
+                });
 
-            setCourseInstance({
-                year: '',
-                semester: '',
-                courseId: ''
-            });
+                alert("Course Instance Saved Successfully.");
+                window.location.reload();
+            }
+            else {
+                const errorData = await response.json();
+                console.error('Error creating course Instance:', errorData);
+            }
         } catch (error) {
-            console.error('Error creating course instance:', error);
+            console.error('Error creating course instance catch:', error);
         }
     };
-
-
-
-
 
 
 
@@ -90,7 +93,8 @@ const CourseInstanceInput = () => {
         <div>
             <div className='sm:w-80 w-72'>
 
-                <form className="w-full py-4 px-6  bg-white rounded-lg shadow-md border-2">
+                <form className="w-full py-4 px-6  bg-white rounded-lg shadow-md border-2"
+                    onSubmit={handleSubmit}>
 
                     <div className="text-center">
                         <h2 className="text-xl font-bold mb-4">Course Instance</h2>
@@ -107,15 +111,17 @@ const CourseInstanceInput = () => {
 
                     {/* Select Course Dropdown */}
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="selectCourse" onChange={handleInputChange}>
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="selectCourse">
                             Select Course
                         </label>
 
                         <select
                             className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
                             id="selectCourse"
+                            name='selectCourse'
+                            onChange={handleInputChange}
                         >
-                            <option value="" disabled selected>Select a course</option>
+                            <option disabled selected value=''>Select a course</option>
                             {courses.map((course) => (
                                 <option key={course.id} value={course.title}>
                                     {course.title}
@@ -141,8 +147,8 @@ const CourseInstanceInput = () => {
                         <input
                             className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
                             id="year"
+                            name="year"
                             type="number"
-
                             onChange={handleInputChange}
                             placeholder="Enter year"
                             onInput={(e) => {
@@ -159,7 +165,6 @@ const CourseInstanceInput = () => {
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             type="submit"
-                            onScroll={handleSubmit}
                         >
                             Create Instance
                         </button>

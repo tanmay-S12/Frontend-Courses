@@ -37,6 +37,8 @@ const SemesterInput = ({ value, onChange }) => {
             </label>
             <input
                 type="text"
+                id='semester'
+                name='semester'
                 value={selectedSemester}
                 onClick={toggleDropdown}
                 readOnly
@@ -48,9 +50,9 @@ const SemesterInput = ({ value, onChange }) => {
             {isOpen && (
                 <div
                     ref={dropdownRef}
-                    className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg mt-1 max-h-32 overflow-y-auto w-full"
+                    className="absolute z-0 bg-white border border-gray-300 rounded shadow-lg mt-1 max-h-32 overflow-y-auto w-full"
                 >
-                    {romanNumerals.slice(0, 7).map((numeral, index) => (
+                    {romanNumerals.slice(0, 8).map((numeral, index) => (
                         <div
                             key={index}
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
