@@ -104,14 +104,7 @@ const CourseInstanceInput = () => {
                         <h2 className="text-xl font-bold mb-4 underline underline-offset-4">Course Instance</h2>
                     </div>
 
-                    {/* <div className='flex justify-end'>
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-                            type="reset"
-                        >
-                            Reset
-                        </button>
-                    </div> */}
+                  
 
                     {/* Select Course Dropdown */}
                     <div className="mb-5">
